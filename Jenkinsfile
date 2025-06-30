@@ -27,13 +27,10 @@ pipeline {
                 }
             }
         }
-        /*stage('Deploy the package'){
+        stage('Deploy the package'){
             steps{
-                sshagent(['Tomcat_Server']) {
-                sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@52.66.200.20:/usr/share/tomcat/webapps'
-                }       
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'TomcatServer', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/usr/share/tomcat/webapps', remoteDirectorySDF: false, removePrefix: '/var/lib/jenkins/workspace/DeployArtifactonTomcatServer/webapp/target', sourceFiles: '/var/lib/jenkins/workspace/DeployArtifactonTomcatServer/webapp/target/webapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])       
             }
-        }*/
-    
+        }
     }   
 }
